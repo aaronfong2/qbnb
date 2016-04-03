@@ -37,8 +37,8 @@ session_start();
 		if (mysql_num_rows($result) > 0) {
 			while($row = mysql_fetch_array($result)) {   //Creates a loop to loop through results
 				echo "<tr>";
-				echo "<td><input type=\"submit\" name=\"ViewProp\" value=\"View\"></td>";
-				//echo "<td><a href=\"editProperty_page.php?id=" . $row['propertyID'] . "\">View</a></td>";
+				echo "<td><form action=\"viewProperty.php?id=" . $row['propertyID'] . "\" method=\"POST\"><input type=\"submit\" name=\"ViewProp\" value=\"View\"></form></td>";
+				//echo "<td><a href=\"editProperty_page.php?id=" . $row['propertyID'] . "\" class=\"button\">View</a></td>";
 				echo "<td>" . $row['street_num'] . " " . $row['street_name'] . "</td>";
 				echo "<td>" . $row['apt_num'] . "</td>";
 				echo "<td>" . $row['postal_code'] . "</td>";

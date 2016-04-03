@@ -28,9 +28,9 @@ session_start();
 		<?php
 		$query = "SELECT propertyID, street_num, street_name, apt_num, postal_code, properties.description, building_type, num_bedrooms, bathrooms, kitchen, pool, laundry, dist_to_subway, pets_allowed, smoking_allowed, balcony, internet_included, districts.name 
 			FROM properties JOIN districts ON properties.districtID=districts.districtID
-			WHERE properties.propertyID=" . $_GET['id'] . " AND is_active=1";
+			WHERE properties.propertyID=" . $_GET['id'] . " AND is_active=1 AND supplierID=" . $_SESSION['login_id'];
 		$result = mysql_query($query);
-		if (mysql_num_rows($result) > 0)
+		if (mysql_num_rows($result) > 0) {
 			$row = mysql_fetch_array($result);
 			echo "<p>Address: <i>" . $row['street_num'] . " " . $row['street_name'] . "</i></p>";
 			echo "<p>Apt: <i>" . $row['apt_num'] . "</i></p>";
@@ -69,12 +69,16 @@ session_start();
 			elseif ($row['internet_included']==1) { echo "Y"; }	
 			echo "</i></p>";
 			echo "</tr>\n";
+		}
+		else {
+			echo "<p>Property Not Found.</p>";
+		}
 
 		
 ?>	
 	</div>
 			<div class="button-centre">
-				<input class="submit" name="submit" value="Edit Property" onClick="Javascript:window.location.href = 'editProfile_page.php';">
+				<input class="submit" name="submit" value="Edit Property" onClick="Javascript:window.location.href = 'editProperty_page.php';">
             </div>
 			<div class="button-centre">
                 <input class="submit" name="submit" value="Delete Property" onClick="Javascript:window.location.href = 'cancelMembership_page.php';">
@@ -91,7 +95,7 @@ session_start();
 
 		$query = "SELECT users.first_name, users.last_name, street_num, street_name, apt_num, start_date, bookings.status
 			FROM (properties JOIN bookings ON properties.propertyID=bookings.propertyID) JOIN users ON bookings.requesterID=users.userID
-			WHERE properties.supplierID=" . $_SESSION['login_id'] . " AND properties.is_active=1";
+			WHERE properties.propertyID=" . $_GET['id'] . " AND properties.supplierID=" . $_SESSION['login_id'] . " AND properties.is_active=1";
 		$result = mysql_query($query);
 		//echo $query;
 		//echo mysql_error();
@@ -145,7 +149,7 @@ session_start();
 		}
 					
 		else {
-		echo "<tr><td><i>You have no bookings on your properties.</i></td></tr>";
+		echo "<tr><td><i>You have no bookings on your property.</i></td></tr>";
 		}
 
 					/*
