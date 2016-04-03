@@ -12,7 +12,7 @@
 
 					if ($_SESSION['login_type']==0) {
 					echo	"<li> <a href='my_properties.php'>My Properties</a></li>
-						<li> <a href='#'>My Trips</a></li>";
+						<li> <a href='my_trips.php'>My Trips</a></li>";
 					} else {
 					echo	"<li> <a href='#'>Manage Members</a></li>
 						<li> <a href='#'>View Bookings</a></li>";

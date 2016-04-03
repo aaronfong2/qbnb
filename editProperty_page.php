@@ -24,7 +24,7 @@ if (!isset($_GET['id'])) {
 		$row = mysql_fetch_array($result);
 ?>
 <div class="container">
-	<h2>Edit Profile</h2>
+	<h2>Edit Property</h2>
 	<p class="centre"> Only complete fields you wish to change</p>
 
 		<form method="post" action="">
