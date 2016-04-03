@@ -1,5 +1,6 @@
 <?php
 session_start()
+include('redirect.php');
 ?>
 <!DOCTYPE html>
 <html>

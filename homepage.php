@@ -6,6 +6,7 @@ include('profile_session.php');
 <head>
 <title>Home Page</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
 	<?php include 'header.php'; ?>

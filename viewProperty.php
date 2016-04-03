@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('redirect.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,20 +19,28 @@ session_start();
 </head>
 <body>
 <?php include_once 'header.php';
-		$test='';
-		$connection = mysql_connect('localhost', 'root', ''); //The Blank string is the password
-		mysql_select_db('qbnb');
+$test='';
+$connection = mysqli_connect('localhost', 'root', '','qbnb'); //The Blank string is the password
+$query = "SELECT propertyID, street_num, street_name, apt_num, postal_code, properties.description, building_type, num_bedrooms, bathrooms, kitchen, pool, laundry, dist_to_subway, pets_allowed, smoking_allowed, balcony, internet_included, districts.name 
+	FROM properties JOIN districts ON properties.districtID=districts.districtID
+	WHERE properties.propertyID=" . $_GET['id'] . " AND is_active=1 AND supplierID=" . $_SESSION['login_id'];
+$result = mysqli_query($connection,$query);
+$prop_exists = mysqli_num_rows($result) > 0;
+if ($prop_exists)
+	$row = mysqli_fetch_array($result);
 ?>
 <h1>My Property</h1>
 <div class=container>
+<?php
+if ($prop_exists) {
+	$addr_urlenc= urlencode($row['street_num']." ".$row['street_name'].", Toronto, ON, Canada");
+	//echo $addr_urlenc;
+?>
+	<div class="mapContainer">
+	<iframe class="gmaps" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCyQS-3kYn6EpMw4xomEiVDN6XRqqD7FBw&q=<?php echo $addr_urlenc?>")></iframe>
+	</div>
 	<div class="main">
 		<?php
-		$query = "SELECT propertyID, street_num, street_name, apt_num, postal_code, properties.description, building_type, num_bedrooms, bathrooms, kitchen, pool, laundry, dist_to_subway, pets_allowed, smoking_allowed, balcony, internet_included, districts.name 
-			FROM properties JOIN districts ON properties.districtID=districts.districtID
-			WHERE properties.propertyID=" . $_GET['id'] . " AND is_active=1 AND supplierID=" . $_SESSION['login_id'];
-		$result = mysql_query($query);
-		if (mysql_num_rows($result) > 0) {
-			$row = mysql_fetch_array($result);
 			echo "<p>Address: <i>" . $row['street_num'] . " " . $row['street_name'] . "</i></p>";
 			echo "<p>Apt: <i>" . $row['apt_num'] . "</i></p>";
 			echo "<p>Postal Code: <i>" . $row['postal_code'] . "</i></p>";
@@ -71,7 +80,7 @@ session_start();
 			echo "</tr>\n";
 		}
 		else {
-			echo "<p>Property Not Found.</p>";
+			echo "<div class=\"main\"><p>Property Not Found.</p></div>";
 		}
 
 		
@@ -90,17 +99,14 @@ session_start();
 		</thead>
 		<tbody>
 		<?php
-		$connection = mysql_connect('localhost', 'root', ''); //The Blank string is the password
-		mysql_select_db('qbnb');
-
 		$query = "SELECT users.first_name, users.last_name, street_num, street_name, apt_num, start_date, bookings.status
 			FROM (properties JOIN bookings ON properties.propertyID=bookings.propertyID) JOIN users ON bookings.requesterID=users.userID
 			WHERE properties.propertyID=" . $_GET['id'] . " AND properties.supplierID=" . $_SESSION['login_id'] . " AND properties.is_active=1";
-		$result = mysql_query($query);
+		$result = mysqli_query($connection,$query);
 		//echo $query;
 		//echo mysql_error();
-		if (mysql_num_rows($result) > 0) {
-			while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
 				echo "<tr>";
 				echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
 				echo "<td>" . $row['street_num'] . " " . $row['street_name'] . "</td>";

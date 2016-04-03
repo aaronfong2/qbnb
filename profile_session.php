@@ -12,8 +12,8 @@ $row = mysql_fetch_assoc($ses_sql);
 
 $_SESSION['login_username'] =$row['username'];
 if(!isset($_SESSION['login_username'])){
-mysql_close($connection); // Closing Connection
-header('Location: index.php'); // Redirecting to login page
+	mysql_close($connection); // Closing Connection
+	header('Location: index.php'); // Redirecting to login page
 }
 $_SESSION['login_id'] = $row['userID'];
 $_SESSION['login_pw'] = $row['password'];

@@ -1,4 +1,5 @@
 <?php
+include('redirect.php');
 include('editProfile.php');
 ?>
 

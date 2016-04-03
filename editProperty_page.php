@@ -1,4 +1,5 @@
 <?php
+include('redirect.php');
 include('editProperty.php');
 if (!isset($_GET['id'])) {
 	include('my_properties.php');

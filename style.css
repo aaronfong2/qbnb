@@ -44,6 +44,14 @@ padding-top: 20px;
 margin:0 auto;
 overflow: hidden;
 }
+div.mapContainer
+{
+width: 100%;
+padding-top: 0px;
+margin:auto;
+overflow: hidden;
+text-align: center;
+}
 div.containerFull
 {
 padding-top: 20px;
@@ -97,6 +105,11 @@ div.nav{
 }
 p.centre{
 	text-align: center;
+}
+iframe.gmaps {
+	width: 500px;
+	height: 400px;
+	border: 0;
 }
 input[type=password]{
 width: 97.7%;

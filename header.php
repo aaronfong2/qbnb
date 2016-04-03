@@ -8,8 +8,6 @@
 			<ul>
 				<li> <a href='profile_page.php'>Profile</a></li>
 				<?php
-					$userType=1;
-
 					if ($_SESSION['login_type']==0) {
 					echo	"<li> <a href='myProperties.php'>My Properties</a></li>
 						<li> <a href='myTrips.php'>My Trips</a></li>";

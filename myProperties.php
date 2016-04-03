@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('redirect.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,15 +28,13 @@ session_start();
 		<tbody>
 		<?php
 		$test='';
-		$connection = mysql_connect('localhost', 'root', ''); //The Blank string is the password
-		mysql_select_db('qbnb');
-
+		$connection = mysqli_connect('localhost', 'root', '','qbnb'); //The Blank string is the password
 		$query = "SELECT propertyID, street_num, street_name, apt_num, postal_code, properties.description, building_type, num_bedrooms, bathrooms, kitchen, pool, laundry, dist_to_subway, pets_allowed, smoking_allowed, balcony, internet_included, districts.name 
 			FROM properties JOIN districts ON properties.districtID=districts.districtID
 			WHERE properties.supplierID=" . $_SESSION['login_id'] . " AND is_active=1";
-		$result = mysql_query($query);
-		if (mysql_num_rows($result) > 0) {
-			while($row = mysql_fetch_array($result)) {   //Creates a loop to loop through results
+		$result = mysqli_query($connection, $query);
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_array($result)) {   //Creates a loop to loop through results
 				echo "<tr>";
 				echo "<td><form action=\"viewProperty.php?id=" . $row['propertyID'] . "\" method=\"POST\"><input type=\"submit\" name=\"ViewProp\" value=\"View\"></form></td>";
 				//echo "<td><a href=\"editProperty_page.php?id=" . $row['propertyID'] . "\" class=\"button\">View</a></td>";
@@ -88,10 +87,10 @@ session_start();
 			WHERE bookings.propertyID IN (SELECT propertyID
 			FROM properties
 			WHERE supplierID=inputUserID)"
-			$result = mysql_query($query);
+			$result = mysqli_query($query);
 
-			if (mysql_num_rows($result) > 0) {
-			while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
+			if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
 			}
 			else {
 			echo "<tr><td><i>There are no bookings on your properties.</i></td></tr>";
@@ -107,17 +106,15 @@ session_start();
 		</thead>
 		<tbody>
 		<?php
-		$connection = mysql_connect('localhost', 'root', ''); //The Blank string is the password
-		mysql_select_db('qbnb');
-
+		$connection = mysqli_connect('localhost', 'root', '','qbnb'); //The Blank string is the password
 		$query = "SELECT users.first_name, users.last_name, street_num, street_name, apt_num, start_date, bookings.status
 			FROM (properties JOIN bookings ON properties.propertyID=bookings.propertyID) JOIN users ON bookings.requesterID=users.userID
 			WHERE properties.supplierID=" . $_SESSION['login_id'] . " AND properties.is_active=1";
-		$result = mysql_query($query);
+		$result = mysqli_query($connection, $query);
 		//echo $query;
-		//echo mysql_error();
-		if (mysql_num_rows($result) > 0) {
-			while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
+		//echo mysqli_error();
+		if (mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
 				echo "<tr>";
 				echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
 				echo "<td>" . $row['street_num'] . " " . $row['street_name'] . "</td>";
@@ -176,10 +173,10 @@ session_start();
 					WHERE bookings.propertyID IN (SELECT propertyID
 					FROM properties
 					WHERE supplierID=inputUserID)"
-					$result = mysql_query($query);
+					$result = mysqli_query($query);
 
-					if (mysql_num_rows($result) > 0) {
-					while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
+					if (mysqli_num_rows($result) > 0) {
+					while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
 					}
 					else {
 					echo "<tr><td><i>There are no bookings on your properties.</i></td></tr>";
