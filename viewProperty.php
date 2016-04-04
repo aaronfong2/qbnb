@@ -40,58 +40,59 @@ if ($prop_exists) {
 	<iframe class="gmaps" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCyQS-3kYn6EpMw4xomEiVDN6XRqqD7FBw&q=<?php echo $addr_urlenc?>")></iframe>
 	</div>
 	<div class="main">
-		<?php
-			echo "<p>Address: <i>" . $row['street_num'] . " " . $row['street_name'] . "</i></p>";
-			echo "<p>Apt: <i>" . $row['apt_num'] . "</i></p>";
-			echo "<p>Postal Code: <i>" . $row['postal_code'] . "</i></p>";
-			echo "<p>Description: <i>" . $row['description'] . "</i></p>";
-			echo "<p>District: <i>" . $row['name'] . "</i></p>";
-			echo "<p>Building Type: <i>" . $row['building_type'] . "</i></p>";
-			echo "<p>Number of Bedrooms: <i>" . $row['num_bedrooms'] . "</i></p>";
-			echo "<p>Bathrooms: <i>" . $row['bathrooms'] . "</i></p>";
-			echo "<p>Kitchen: <i>" . $row['kitchen'] . "</i></p>";
-			echo "<p>Pool: <i>";
-			if (is_null($row['pool'])) {}
-			elseif ($row['pool'] == 0) { echo "N"; }
-			elseif ($row['pool']==1) { echo "Y"; }	
-			echo			"</i></p>";
-			echo "<p>Laundry: <i>" . $row['laundry'] . "</i></p>";
-			echo "<p>Distance to Subway (m): <i>" . $row['dist_to_subway'] . "</i></p>";
-			echo "<p>Pets Allowed?: <i>"; 
-			if (is_null($row['pets_allowed'])) {}
-			elseif ($row['pets_allowed'] == 0) { echo "N"; }
-			elseif ($row['pets_allowed']==1) { echo "Y"; }	
-			echo "</i></p>";
-			echo "<p>Smoking Allowed?: <i>";
-			if (is_null($row['smoking_allowed'])) {}
-			elseif ($row['smoking_allowed'] == 0) { echo "N"; }
-			elseif ($row['smoking_allowed']==1) { echo "Y"; }	
-			echo "</i></p>";
-			echo "<p>Balcony: <i>";
-			if (is_null($row['balcony'])) {}
-			elseif ($row['balcony'] == 0) { echo "N"; }
-			elseif ($row['balcony']==1) { echo "Y"; }	
-			echo "</i></p>";
-			echo "<p>Internet Included?: <i>";
-			if (is_null($row['internet_included'])) {}
-			elseif ($row['internet_included'] == 0) { echo "N"; }
-			elseif ($row['internet_included']==1) { echo "Y"; }	
-			echo "</i></p>";
-			echo "</tr>\n";
-		}
-		else {
-			echo "<div class=\"main\"><p>Property Not Found.</p></div>";
-		}
-
-		
+<?php
+	echo "<p>Address: <i>" . $row['street_num'] . " " . $row['street_name'] . "</i></p>";
+	echo "<p>Apt: <i>" . $row['apt_num'] . "</i></p>";
+	echo "<p>Postal Code: <i>" . $row['postal_code'] . "</i></p>";
+	echo "<p>Description: <i>" . $row['description'] . "</i></p>";
+	echo "<p>District: <i>" . $row['name'] . "</i></p>";
+	echo "<p>Building Type: <i>" . $row['building_type'] . "</i></p>";
+	echo "<p>Number of Bedrooms: <i>" . $row['num_bedrooms'] . "</i></p>";
+	echo "<p>Bathrooms: <i>" . $row['bathrooms'] . "</i></p>";
+	echo "<p>Kitchen: <i>" . $row['kitchen'] . "</i></p>";
+	echo "<p>Pool: <i>";
+	if (is_null($row['pool'])) {}
+	elseif ($row['pool'] == 0) { echo "N"; }
+	elseif ($row['pool']==1) { echo "Y"; }	
+	echo			"</i></p>";
+	echo "<p>Laundry: <i>" . $row['laundry'] . "</i></p>";
+	echo "<p>Distance to Subway (m): <i>" . $row['dist_to_subway'] . "</i></p>";
+	echo "<p>Pets Allowed?: <i>"; 
+	if (is_null($row['pets_allowed'])) {}
+	elseif ($row['pets_allowed'] == 0) { echo "N"; }
+	elseif ($row['pets_allowed']==1) { echo "Y"; }	
+	echo "</i></p>";
+	echo "<p>Smoking Allowed?: <i>";
+	if (is_null($row['smoking_allowed'])) {}
+	elseif ($row['smoking_allowed'] == 0) { echo "N"; }
+	elseif ($row['smoking_allowed']==1) { echo "Y"; }	
+	echo "</i></p>";
+	echo "<p>Balcony: <i>";
+	if (is_null($row['balcony'])) {}
+	elseif ($row['balcony'] == 0) { echo "N"; }
+	elseif ($row['balcony']==1) { echo "Y"; }	
+	echo "</i></p>";
+	echo "<p>Internet Included?: <i>";
+	if (is_null($row['internet_included'])) {}
+	elseif ($row['internet_included'] == 0) { echo "N"; }
+	elseif ($row['internet_included']==1) { echo "Y"; }	
+	echo "</i></p>";
+	echo "</tr>\n";
 ?>	
 	</div>
-			<div class="button-centre">
-				<input class="submit" name="submit" value="Edit Property" onClick="Javascript:window.location.href = 'editProperty_page.php';">
-            </div>
-			<div class="button-centre">
-                <input class="submit" name="submit" value="Delete Property" onClick="Javascript:window.location.href = 'cancelMembership_page.php';">
-			</div>
+	<div class="button-centre">
+	<input class="submit" name="submit" value="Edit Property" onClick="Javascript:window.location.href = 'editProperty_page.php?id=<?php echo $row['propertyID'] ?>';">
+	</div>
+	<div class="button-centre">
+		<input class="submit" name="submit" value="Delete Property" onClick="Javascript:window.location.href = 'cancelMembership_page.php';">
+	</div>
+<?php		
+}
+else {
+	echo "<div class=\"main\"><p>Property Not Found.</p></div>";
+}
+?>
+
 <h1>Bookings on My Property</h1>
 	<table id="bookings_table" class="tablesorter">
 		<thead>

@@ -1,6 +1,6 @@
 <?php
-include('redirect.php');
 include('editProfile.php');
+include('redirect.php');
 ?>
 
 <!DOCTYPE HTML>
@@ -70,7 +70,7 @@ include('editProfile.php');
 			
 			<div class="button-centre">
 				<input class="submit" type="submit" name="submit" value="Submit">
-				<span class="error"><?php echo $editError;?></span>
+				<!--<span class="error"><?php echo $error;?></span>-->
 				<!--<span class="success"><?php echo $successMessage;?></span>-->
 			</div>
 		</form>

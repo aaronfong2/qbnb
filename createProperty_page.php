@@ -1,16 +1,12 @@
 <?php
-include('editProperty.php');
+include('createProperty.php');
 include('redirect.php');
-if (!isset($_GET['id'])) {
-	include('myProperties.php');
-	header("Location: myProperties.php");
-}
 ?>
 
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Edit Property</title>
+<title>Create Property</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -51,17 +47,7 @@ if (!isset($_GET['id'])) {
 				<!--<span class="error"><?php echo $phoneError;?></span>-->
 
 				<label>District :</label>
-				<?php echo $row['name'] ?>
-				<select name="district">
-				<?php
-				$dist_query = "SELECT * FROM districts";
-				$dist_result = mysql_query($dist_query);
-				while ($dist_row=mysql_fetch_array($dist_result)) {
-				echo "<option value=\"" . $dist_row['districtID'] . "\">" . $dist_row['name'] . "</option>";
-				echo $dist_row['districtID'];
-				}
-				?>
-				</select>
+				<input class="input" type="text" name="district" value="" placeholder= <?php echo $row['name'] ?>>
 				<!--<span class="error"><?php echo $phoneExtError;?></span>-->
 
 				<label>Building Type :</label>

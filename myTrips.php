@@ -117,7 +117,7 @@ include('redirect.php');
 <div>
 <div class="container">
 			<div class="button-centre">
-				<input class="submit" name="submit" value="Search for Accommodations" onClick="Javascript:window.location.href = 'editProfile_page.php';">
+				<input class="submit" name="submit" value="Search for Accommodations" onClick="Javascript:window.location.href = 'searchAccoms.php';">
             </div>
 </div>
 </body>
